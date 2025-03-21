@@ -23,4 +23,17 @@ public class FizzBuzzTest {
     public void testNumber() {
         assertEquals("7", FizzBuzz.fizzbuzz(7));
     }
+
+
+    @Test
+    public void testWoof3() { assertEquals("Woof", FizzBuzz.fizzbuzz(3, "Woof"));}
+
+    @Test
+    public void testWoof5() { assertEquals("Buzz", FizzBuzz.fizzbuzz(5, "Woof"));}
+
+    @Test
+    public void testWoof15() { assertEquals("WoofBuzz", FizzBuzz.fizzbuzz(15, "Woof"));}
+
+    @Test
+    public void testWoofNumber() { assertEquals("7", FizzBuzz.fizzbuzz(7, "Woof")); }
 }
