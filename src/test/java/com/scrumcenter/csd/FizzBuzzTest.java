@@ -1,9 +1,17 @@
 package  com.scrumcenter.csd;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class FizzBuzzTest {
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+class FizzBuzzTest {
     @Test
     public void testFizz() {
         assertEquals("Fizz", FizzBuzz.fizzbuzz(3));
@@ -49,4 +57,29 @@ public class FizzBuzzTest {
 
     @Test
     public void testWoofMeowNumber() { assertEquals("7", FizzBuzz.fizzbuzz(7, "Woof", "Meow")); }
+
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    public void testPrintUsedWordsWoofMeow() {
+        FizzBuzz.fizzbuzz(7, "Woof", "Meow");
+        assertThat(outContent.toString(), containsString("Using words Woof and Meow."));
+    }
+
+    @Test
+    public void testPrintUsedWordsFizzBuzz() {
+        FizzBuzz.fizzbuzz(7);
+        assertThat(outContent.toString(), containsString("Using words Fizz and Buzz."));
+    }
 }
