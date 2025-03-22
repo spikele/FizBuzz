@@ -2,6 +2,7 @@ package  com.scrumcenter.csd;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
@@ -81,5 +82,19 @@ class FizzBuzzTest {
     public void testPrintUsedWordsFizzBuzz() {
         FizzBuzz.fizzbuzz(7);
         assertThat(outContent.toString(), containsString("Using words Fizz and Buzz."));
+    }
+
+
+    @Test
+    public void testRange1To5() { assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, FizzBuzz.fizzbuzz(1, 5)); }
+
+    @Test
+    public void testRange13To16() { assertArrayEquals(new String[]{"13", "14", "FizzBuzz", "16"}, FizzBuzz.fizzbuzz(13, 16)); }
+
+
+    @Test
+    public void testPrintEach() {
+        FizzBuzz.fizzbuzz(1, 5);
+        assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, outContent.toString().split("\\r?\\n"));
     }
 }
