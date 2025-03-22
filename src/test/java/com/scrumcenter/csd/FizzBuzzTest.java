@@ -1,5 +1,6 @@
 package  com.scrumcenter.csd;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.withTextFromSystemIn;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -86,15 +87,27 @@ class FizzBuzzTest {
 
 
     @Test
-    public void testRange1To5() { assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, FizzBuzz.fizzbuzz(1, 5)); }
+    public void testRange1To5() throws Exception  {
+        withTextFromSystemIn("x", "x", "x", "x", "x").execute(() ->
+            assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, FizzBuzz.fizzbuzz(1, 5))
+        );
+    }
 
     @Test
-    public void testRange13To16() { assertArrayEquals(new String[]{"13", "14", "FizzBuzz", "16"}, FizzBuzz.fizzbuzz(13, 16)); }
+    public void testRange13To16() throws Exception  {
+
+        withTextFromSystemIn("x", "x", "x", "x").execute(() ->
+            assertArrayEquals(new String[]{"13", "14", "FizzBuzz", "16"}, FizzBuzz.fizzbuzz(13, 16))
+        );
+    }
 
 
     @Test
-    public void testPrintEach() {
-        FizzBuzz.fizzbuzz(1, 5);
-        assertArrayEquals(new String[]{"1", "2", "Fizz", "4", "Buzz"}, outContent.toString().split("\\r?\\n"));
+    public void testPrintEach() throws Exception  {
+
+        withTextFromSystemIn("x", "x", "x", "x", "x", "x").execute(() -> {
+            FizzBuzz.fizzbuzz(1, 5);
+            assertArrayEquals(new String[]{"Press enter to show the next answer.", "1", "2", "Fizz", "4", "Buzz"}, outContent.toString().split("\\r?\\n"));
+        });
     }
 }

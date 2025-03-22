@@ -1,6 +1,7 @@
 package com.scrumcenter.csd;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FizzBuzz {
     public static String fizzbuzz(int n) {
@@ -25,12 +26,18 @@ public class FizzBuzz {
     }
 
     public static String[] fizzbuzz(int start, int end) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Press enter to show the next answer.");
+
         ArrayList<String> res = new ArrayList<>();
         for (int i = start; i <= end; i++) {
+            scanner.nextLine();
             String curr = fizzbuzzNoPrint(i, "Fizz", "Buzz");
             System.out.println(curr);
             res.add(curr);
         }
+
+        scanner.close();
 
         return res.toArray(new String[0]);
     }
